@@ -1,7 +1,7 @@
-const AllPostsPage = () => {
-    return ( 
-        <p>All Posts Page</p>
-     );
-}
- 
+const AllPostsPage = () => (
+
+  <p>All Posts Page</p>
+
+);
+
 export default AllPostsPage;
