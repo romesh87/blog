@@ -1,7 +1,7 @@
-const SinglePostPage = () => (
+import PostContent from '../../components/Posts/PostDetail/PostContent';
 
-  <p>Single Post Page</p>
-
+const PostDetailPage = () => (
+  <PostContent />
 );
 
-export default SinglePostPage;
+export default PostDetailPage;
