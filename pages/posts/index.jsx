@@ -1,10 +1,17 @@
+import Head from 'next/head';
+
 import AllPosts from '../../components/Posts/AllPosts';
 
 import { getAllPosts } from '../../lib/posts-util';
 
 const AllPostsPage = ({ posts }) => (
-
-  <AllPosts posts={posts} />
+  <>
+    <Head>
+      <title>All posts</title>
+      <meta name="description" content="A list of all posts related to web development" />
+    </Head>
+    <AllPosts posts={posts} />
+  </>
 
 );
 
