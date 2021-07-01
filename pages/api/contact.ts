@@ -24,9 +24,10 @@ const handler = async (req, res) => {
     };
 
     let client;
+    const connectionString = `mongodb+srv://${process.env.mongodb_username}:${process.env.mongodb_password}@${process.env.mongodb_clustername}.oazcq.mongodb.net/${process.env.mongodb_database}?retryWrites=true&w=majority`;
 
     try {
-      client = await MongoClient.connect('mongodb+srv://admin:admin@cluster0.oazcq.mongodb.net/blog?retryWrites=true&w=majority');
+      client = await MongoClient.connect(connectionString);
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error('Unable to establish connection to DB!', error);
