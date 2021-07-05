@@ -2,7 +2,13 @@ import ReactDOM from 'react-dom';
 
 import styles from './Notification.module.css';
 
-function Notification(props) {
+interface Props {
+  title: string;
+  message: string;
+  status: 'success' | 'error' | 'pending';
+}
+
+function Notification(props: Props) {
   const { title, message, status } = props;
 
   let statusClasses = '';

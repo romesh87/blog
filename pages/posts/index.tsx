@@ -1,10 +1,10 @@
+import { InferGetStaticPropsType } from 'next';
 import Head from 'next/head';
 
 import AllPosts from '../../components/Posts/AllPosts';
-
 import { getAllPosts } from '../../lib/posts-util';
 
-const AllPostsPage = ({ posts }) => (
+const AllPostsPage = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => (
   <>
     <Head>
       <title>All posts</title>
@@ -15,7 +15,7 @@ const AllPostsPage = ({ posts }) => (
 
 );
 
-export const getStaticProps = () => {
+export const getStaticProps = async () => {
   const allPosts = getAllPosts();
 
   return {

@@ -1,10 +1,10 @@
+import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
 import Head from 'next/head';
 
 import PostContent from '../../components/Posts/PostDetail/PostContent';
-
 import { getPostData, getPostsFiles } from '../../lib/posts-util';
 
-const PostDetailPage = ({ post }) => (
+const PostDetailPage = ({ post }: InferGetStaticPropsType<typeof getStaticProps>) => (
   <>
     <Head>
       <title>{post.title}</title>
@@ -14,11 +14,11 @@ const PostDetailPage = ({ post }) => (
   </>
 );
 
-export const getStaticProps = (context) => {
+export const getStaticProps = async (context: GetStaticPropsContext) => {
   const { params } = context;
-  const { slug } = params;
+  const slug = params.slug;
 
-  const postData = getPostData(slug);
+  const postData = getPostData(String(slug));
 
   return {
     props: {
