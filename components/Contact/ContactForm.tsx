@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Notification from '../UI/Notification/Notification';
 import styles from './ContactForm.module.css';
 
-const sendContactData = async (contactDetails) => {
+const sendContactData = async (contactDetails: { email: string, name: string, message: string }): Promise<void> => {
   const response = await fetch('/api/contact', {
     method: 'POST',
     headers: {
@@ -24,8 +24,8 @@ const ContactForm = () => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [message, setMessage] = useState('');
-  const [requestStatus, setRequestStatus] = useState(); // pending | success | error
-  const [requestError, setRequestError] = useState();
+  const [requestStatus, setRequestStatus] = useState(''); // pending | success | error
+  const [requestError, setRequestError] = useState(null);
 
   // eslint-disable-next-line consistent-return
   useEffect(() => {
@@ -39,7 +39,7 @@ const ContactForm = () => {
     }
   }, [requestStatus]);
 
-  const onSubmitHandler = async (e) => {
+  const onSubmitHandler = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
 
     setRequestStatus('pending');
@@ -94,7 +94,7 @@ const ContactForm = () => {
         </div>
         <div className={styles.control}>
           <label htmlFor="message">Your Message</label>
-          <textarea id="message" rows="5" value={message} onChange={(e) => setMessage(e.target.value)} />
+          <textarea id="message" rows={5} value={message} onChange={(e) => setMessage(e.target.value)} />
         </div>
 
         <div className={styles.actions}>

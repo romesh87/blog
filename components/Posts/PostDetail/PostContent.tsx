@@ -14,8 +14,13 @@ SyntaxHighlighter.registerLanguage('py', py);
 import PostHeader from './PostHeader';
 
 import styles from './PostContent.module.css';
+import { IPost } from '../../../interfaces';
 
-const PostContent = ({ post }) => {
+interface Props {
+  post: IPost;
+}
+
+const PostContent = ({ post }: Props) => {
   const imagePath = `/images/posts/${post.slug}/${post.image}`;
 
   const customComponents = {
