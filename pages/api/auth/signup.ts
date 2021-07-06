@@ -1,3 +1,4 @@
+import { MongoClient } from 'mongodb';
 import { NextApiHandler } from 'next';
 import { hashPassword } from '../../../lib/auth';
 import { connectToDatabase } from '../../../lib/db';
@@ -18,7 +19,7 @@ const handler: NextApiHandler = async (req, res) => {
       return;
     }
 
-    let client;
+    let client: MongoClient;
     try {
       client = await connectToDatabase();
     } catch (error) {

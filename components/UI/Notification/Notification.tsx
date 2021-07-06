@@ -2,7 +2,7 @@ import ReactDOM from 'react-dom';
 
 import styles from './Notification.module.css';
 
-interface Props {
+export interface Props {
   title: string;
   message: string;
   status: 'success' | 'error' | 'pending';

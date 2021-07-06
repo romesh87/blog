@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { signIn } from 'next-auth/client';
 import { useRouter } from 'next/router';
 
+import Notification, { Props as INotification } from '../UI/Notification/Notification';
 import styles from './AuthForm.module.css';
 
 export interface Props {
@@ -33,6 +34,20 @@ const AuthForm: React.FC<Props> = (props) => {
   const router = useRouter();
 
   const [isLogin, setIsLogin] = useState(true);
+  const [requestStatus, setRequestStatus] = useState(''); // pending | success | error
+  const [requestError, setRequestError] = useState(null);
+
+  // eslint-disable-next-line consistent-return
+  useEffect(() => {
+    if (requestStatus === 'error') {
+      const timer = setTimeout(() => {
+        setRequestStatus(null);
+        setRequestError(null);
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [requestStatus]);
 
   const switchAuthModeHandler = () => {
     setIsLogin((prevState) => { 
@@ -42,6 +57,8 @@ const AuthForm: React.FC<Props> = (props) => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+
+    setRequestStatus('pending');
 
     // 'any' type is used to work around 'Object is possibly undefined' TS error
     const enteredEmail = (emailInputRef as any).current.value;
@@ -56,15 +73,37 @@ const AuthForm: React.FC<Props> = (props) => {
 
       if (!result.error) {
         router.replace('/');
+      } else {
+        setRequestStatus('error');
+        setRequestError(result.error);
       }
     } else {
       try {
         const result = await createUser(enteredEmail, enteredPassword);
         console.log('User created!', result);
+        router.replace('/');
       } catch (error) {
+        setRequestStatus('error');
+        setRequestError(error);
         console.error('Unable to create user!', error);
       }
     }
+  }
+
+  let notification: INotification;
+
+  if (requestStatus === 'pending') {
+    notification = {
+      status: 'pending',
+      title: isLogin ? 'Logging in' : 'Signing up',
+      message: isLogin ? 'Please wait while we are logging you in...' : 'Please wait while we are signing you up...',
+    };
+  } else if (requestStatus === 'error') {
+    notification = {
+      status: 'error',
+      title: 'Error!',
+      message: requestError,
+    };
   }
 
   return (
@@ -90,6 +129,13 @@ const AuthForm: React.FC<Props> = (props) => {
           </button>
         </div>
       </form>
+      {notification && (
+        <Notification
+          status={notification.status}
+          title={notification.title}
+          message={notification.message}
+        />
+      )}
     </section>
   );
 }
