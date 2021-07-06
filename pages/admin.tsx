@@ -1,26 +1,9 @@
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import { getSession } from 'next-auth/client';
+import { IGuardedPage } from '../interfaces';
 
-
-const AdminPage: React.FC = () => {
-  const router = useRouter();
-
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    getSession().then((session) => {
-      if (session) {
-        setIsLoading(false);
-      } else {
-        router.replace('/auth');
-      }
-    })
-  }, [])
-
-  if (isLoading) return <div style={{textAlign: 'center'}}>Loading...</div>
-
+const AdminPage: IGuardedPage = () => {
   return ( <div>Admin page</div> );
 }
- 
+
+AdminPage.auth = true;
+
 export default AdminPage;
