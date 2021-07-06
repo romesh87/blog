@@ -5,7 +5,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 10%;
+    padding: 0 5% 0 10%;
   }
   
   .header ul {
@@ -31,6 +31,22 @@
     color: var(--color-grey-200);
   }
   
+  .userContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 12%;
+  }
+
+  .userName {
+    color:  var(--color-grey-100);
+  }
+
+  .userImage {
+    border-radius: 50%;
+    background-color: var(--color-grey-100);
+  }
+
   @media (min-width: 768px) {
     .header ul {
       gap: 0.5rem;
@@ -40,3 +56,4 @@
       font-size: var(--size-5);
     }
   }
+
