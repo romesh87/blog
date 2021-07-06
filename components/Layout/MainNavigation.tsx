@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import Link from 'next/link';
-import Logo from './Logo';
+import Image from 'next/image';
 
+import Logo from './Logo';
 import styles from './MainNavigation.module.css';
 
 const MainNavigation = () => (
@@ -18,7 +19,19 @@ const MainNavigation = () => (
           <Link href="/contact">Contact</Link>
         </li>
       </ul>
-    </nav>
+     </nav>
+     <div className={styles.userContainer}>
+      <div>
+        <Image  
+          src="/images/site/avatar.png"
+          alt="user avatar"
+          width={40}
+          height={40}
+          className={styles.userImage}
+        />`
+      </div>
+        <span className = {styles.userName}>Hi, UserName</span>
+      </div>
   </header>
 );
 
