@@ -35,7 +35,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 12%;
+    width: 28%;
   }
 
   .userName {
@@ -45,6 +45,22 @@
   .userImage {
     border-radius: 50%;
     background-color: var(--color-grey-100);
+  }
+
+  .logout {
+    cursor: pointer;
+    font: inherit;
+    color: var(--color-grey-100);
+    background-color: inherit;
+    border: 1px solid var(--color-grey-100);
+    border-radius: 4px;
+    width: 23%;
+    padding: 0.3rem;
+  }
+
+  .logout:hover {
+    background-color: var(--color-grey-100);
+    color: black;
   }
 
   @media (min-width: 768px) {
