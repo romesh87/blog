@@ -1,5 +1,6 @@
-import { MongoClient } from 'mongodb';
 import { NextApiHandler } from 'next';
+
+import { connectToDatabase } from '../../lib/db';
 
 const handler: NextApiHandler = async (req, res) => {
   if (req.method === 'POST') {
@@ -25,10 +26,8 @@ const handler: NextApiHandler = async (req, res) => {
     };
 
     let client;
-    const connectionString = `mongodb+srv://${process.env.mongodb_username}:${process.env.mongodb_password}@${process.env.mongodb_clustername}.oazcq.mongodb.net/${process.env.mongodb_database}?retryWrites=true&w=majority`;
-
     try {
-      client = await MongoClient.connect(connectionString);
+      client = await connectToDatabase();
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error('Unable to establish connection to DB!', error);
