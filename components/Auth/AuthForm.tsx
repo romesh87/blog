@@ -1,0 +1,97 @@
+import React, { useState, useRef, useEffect } from 'react';
+import { signIn } from 'next-auth/client';
+import { useRouter } from 'next/router';
+
+import styles from './AuthForm.module.css';
+
+export interface Props {
+  onChangeTitle: (title: string) => void;
+}
+
+const createUser = async (email, password) => {
+  const response = await fetch('/api/auth/signup', {
+    method: 'POST',
+    body: JSON.stringify({ email, password }),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || 'Something went wrong!');
+  }
+
+  return data;
+}
+
+const AuthForm: React.FC<Props> = (props) => {
+  const emailInputRef = useRef();
+  const passwordInputRef = useRef();
+
+  const router = useRouter();
+
+  const [isLogin, setIsLogin] = useState(true);
+
+  const switchAuthModeHandler = () => {
+    setIsLogin((prevState) => { 
+      props.onChangeTitle(prevState ? 'Signup' : 'Login');
+      return !prevState });
+  }
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+
+    // 'any' type is used to work around 'Object is possibly undefined' TS error
+    const enteredEmail = (emailInputRef as any).current.value;
+    const enteredPassword = (passwordInputRef as any).current.value;
+
+    if (isLogin) {
+      const result = await signIn('credentials', { 
+        redirect: false,
+        email: enteredEmail,
+        password: enteredPassword,  
+      });
+
+      if (!result.error) {
+        router.replace('/');
+      }
+    } else {
+      try {
+        const result = await createUser(enteredEmail, enteredPassword);
+        console.log('User created!', result);
+      } catch (error) {
+        console.error('Unable to create user!', error);
+      }
+    }
+  }
+
+  return (
+    <section className={styles.auth}>
+      <h1>{isLogin ? 'Login' : 'Sign Up'}</h1>
+      <form onSubmit={submitHandler}>
+        <div className={styles.control}>
+          <label htmlFor='email'>Your Email</label>
+          <input type='email' id='email' ref={emailInputRef} required />
+        </div>
+        <div className={styles.control}>
+          <label htmlFor='password'>Your Password</label>
+          <input type='password' id='password' ref={passwordInputRef} required />
+        </div>
+        <div className={styles.actions}>
+          <button>{isLogin ? 'Login' : 'Create Account'}</button>
+          <button
+            type='button'
+            className={styles.toggle}
+            onClick={switchAuthModeHandler}
+          >
+            {isLogin ? 'Create new account' : 'Login with existing account'}
+          </button>
+        </div>
+      </form>
+    </section>
+  );
+}
+
+export default AuthForm;
