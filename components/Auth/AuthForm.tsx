@@ -126,7 +126,7 @@ const AuthForm: React.FC<Props> = (props) => {
           <input type="password" id="password" ref={passwordInputRef} required />
         </div>
         <div className={styles.actions}>
-          <button type="button">{isLogin ? 'Login' : 'Create Account'}</button>
+          <button type="submit">{isLogin ? 'Login' : 'Create Account'}</button>
           <button
             type="button"
             className={styles.toggle}

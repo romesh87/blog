@@ -1,6 +1,7 @@
+import FeedbackList from '../components/Feedback/FeedbackList';
 import { IGuardedPage } from '../interfaces';
 
-const AdminPage: IGuardedPage = () => (<div>Admin page</div>);
+const AdminPage: IGuardedPage = () => (<><FeedbackList /></>);
 
 AdminPage.auth = true;
 
