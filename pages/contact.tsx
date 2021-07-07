@@ -1,8 +1,9 @@
+import { NextPage } from 'next';
 import Head from 'next/head';
 
 import ContactForm from '../components/Contact/ContactForm';
 
-const ContactPage = () => (
+const ContactPage: NextPage = () => (
   <>
     <Head>
       <title>Contact Me</title>

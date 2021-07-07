@@ -5,7 +5,7 @@ import { verifyPassword } from '../../../lib/auth';
 import { connectToDatabase } from '../../../lib/db';
 
 export default NextAuth({
-  session: { 
+  session: {
     jwt: true,
   },
   providers: [
@@ -17,9 +17,9 @@ export default NextAuth({
         } catch (error) {
           // eslint-disable-next-line no-console
           console.error('Unable to establish connection to DB!', error);
-          throw new Error('Unable to establish connection to DB!')
+          throw new Error('Unable to establish connection to DB!');
         }
-        
+
         const user = await client.db().collection('users').findOne({ email: credentials.email });
         if (!user) {
           throw new Error('Invalid email or password!');
@@ -31,9 +31,9 @@ export default NextAuth({
         }
 
         client.close();
-        
-        return { email: user.email }
-      }
-    })
-  ]
+
+        return { email: user.email };
+      },
+    }),
+  ],
 });

@@ -1,3 +1,5 @@
+// eslint-disable-next-line no-use-before-define
+import React from 'react';
 import Image from 'next/image';
 
 import styles from './PostHeader.module.css';
@@ -7,7 +9,7 @@ interface Props {
   image: string;
 }
 
-const PostHeader = ({ title, image }: Props) => (
+const PostHeader: React.FC<Props> = ({ title, image }) => (
   <header className={styles.header}>
     <h1>{title}</h1>
     <Image

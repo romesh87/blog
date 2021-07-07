@@ -1,31 +1,16 @@
-import Head from 'next/head';
-import { Provider, getSession } from 'next-auth/client';
+// eslint-disable-next-line no-use-before-define
 import React, { useEffect, useState } from 'react';
-
-import '../styles/globals.css';
-import Layout from '../components/Layout/Layout';
+import Head from 'next/head';
+import { getSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
 
-const MyApp = ({ Component, pageProps }) => {
-  return (
-    <Layout>
-      <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
-     {Component.auth ? (
-        <Auth>
-          <Component {...pageProps} />
-        </Auth>
-      ) : (
-        <Component {...pageProps} />
-      )}
-    </Layout>
-  );
-}
+import Layout from '../components/Layout/Layout';
+
+import '../styles/globals.css';
 
 const Auth = ({ children }) => {
   const router = useRouter();
-  
+
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -35,14 +20,30 @@ const Auth = ({ children }) => {
       } else {
         router.replace('/auth');
       }
-    })
-  }, [])
-  
+    });
+  }, []);
+
   if (isLoading) {
-    return <div style={{ textAlign: 'center' }}>Loading...</div>
+    return <div style={{ textAlign: 'center' }}>Loading...</div>;
   }
 
   return children;
-}
+};
+
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+const MyApp = ({ Component, pageProps }) => (
+  <Layout>
+    <Head>
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+    </Head>
+    {Component.auth ? (
+      <Auth>
+        <Component {...pageProps} />
+      </Auth>
+    ) : (
+      <Component {...pageProps} />
+    )}
+  </Layout>
+);
 
 export default MyApp;

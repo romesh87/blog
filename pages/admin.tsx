@@ -1,8 +1,6 @@
 import { IGuardedPage } from '../interfaces';
 
-const AdminPage: IGuardedPage = () => {
-  return ( <div>Admin page</div> );
-}
+const AdminPage: IGuardedPage = () => (<div>Admin page</div>);
 
 AdminPage.auth = true;
 

@@ -1,10 +1,11 @@
+// eslint-disable-next-line no-use-before-define
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import { getSession } from 'next-auth/client';
-import { useEffect, useState } from 'react';
 
-import AuthForm from '../components/Auth/AuthForm';
 import { useRouter } from 'next/router';
- 
+import AuthForm from '../components/Auth/AuthForm';
+
 const AuthPage: React.FC = () => {
   const router = useRouter();
 
@@ -13,28 +14,28 @@ const AuthPage: React.FC = () => {
 
   useEffect(() => {
     getSession().then((session) => {
-      if(session) {
+      if (session) {
         router.replace('/');
       } else {
         setIsLoading(false);
       }
-    })  
+    });
   }, []);
 
-  const onChangeTitleHandler = (title: string): void => {
-    setTitle(title);
-  }
+  const onChangeTitleHandler = (newTitle: string): void => {
+    setTitle(newTitle);
+  };
 
-  if (isLoading) return <div style={{textAlign: 'center'}}>Loading...</div>
+  if (isLoading) return <div style={{ textAlign: 'center' }}>Loading...</div>;
 
   return (
     <>
       <Head>
         <title>{title}</title>
       </Head>
-      <AuthForm onChangeTitle={(title) => onChangeTitleHandler(title)}/>
+      <AuthForm onChangeTitle={(newTitle) => onChangeTitleHandler(newTitle)} />
     </>
-  )
-}
- 
+  );
+};
+
 export default AuthPage;

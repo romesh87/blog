@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
+// eslint-disable-next-line no-use-before-define
 import React, { useState, useRef, useEffect } from 'react';
 import { signIn } from 'next-auth/client';
 import { useRouter } from 'next/router';
@@ -14,8 +16,8 @@ const createUser = async (email, password) => {
     method: 'POST',
     body: JSON.stringify({ email, password }),
     headers: {
-      'Content-Type': 'application/json'
-    }
+      'Content-Type': 'application/json',
+    },
   });
 
   const data = await response.json();
@@ -25,7 +27,7 @@ const createUser = async (email, password) => {
   }
 
   return data;
-}
+};
 
 const AuthForm: React.FC<Props> = (props) => {
   const emailInputRef = useRef();
@@ -50,10 +52,11 @@ const AuthForm: React.FC<Props> = (props) => {
   }, [requestStatus]);
 
   const switchAuthModeHandler = () => {
-    setIsLogin((prevState) => { 
+    setIsLogin((prevState) => {
       props.onChangeTitle(prevState ? 'Signup' : 'Login');
-      return !prevState });
-  }
+      return !prevState;
+    });
+  };
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -61,14 +64,16 @@ const AuthForm: React.FC<Props> = (props) => {
     setRequestStatus('pending');
 
     // 'any' type is used to work around 'Object is possibly undefined' TS error
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const enteredEmail = (emailInputRef as any).current.value;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const enteredPassword = (passwordInputRef as any).current.value;
 
     if (isLogin) {
-      const result = await signIn('credentials', { 
+      const result = await signIn('credentials', {
         redirect: false,
         email: enteredEmail,
-        password: enteredPassword,  
+        password: enteredPassword,
       });
 
       if (!result.error) {
@@ -80,15 +85,17 @@ const AuthForm: React.FC<Props> = (props) => {
     } else {
       try {
         const result = await createUser(enteredEmail, enteredPassword);
+        // eslint-disable-next-line no-console
         console.log('User created!', result);
         router.replace('/');
       } catch (error) {
         setRequestStatus('error');
         setRequestError(error);
+        // eslint-disable-next-line no-console
         console.error('Unable to create user!', error);
       }
     }
-  }
+  };
 
   let notification: INotification;
 
@@ -111,17 +118,17 @@ const AuthForm: React.FC<Props> = (props) => {
       <h1>{isLogin ? 'Login' : 'Sign Up'}</h1>
       <form onSubmit={submitHandler}>
         <div className={styles.control}>
-          <label htmlFor='email'>Your Email</label>
-          <input type='email' id='email' ref={emailInputRef} required />
+          <label htmlFor="email">Your Email</label>
+          <input type="email" id="email" ref={emailInputRef} required />
         </div>
         <div className={styles.control}>
-          <label htmlFor='password'>Your Password</label>
-          <input type='password' id='password' ref={passwordInputRef} required />
+          <label htmlFor="password">Your Password</label>
+          <input type="password" id="password" ref={passwordInputRef} required />
         </div>
         <div className={styles.actions}>
-          <button>{isLogin ? 'Login' : 'Create Account'}</button>
+          <button type="button">{isLogin ? 'Login' : 'Create Account'}</button>
           <button
-            type='button'
+            type="button"
             className={styles.toggle}
             onClick={switchAuthModeHandler}
           >
@@ -138,6 +145,6 @@ const AuthForm: React.FC<Props> = (props) => {
       )}
     </section>
   );
-}
+};
 
 export default AuthForm;

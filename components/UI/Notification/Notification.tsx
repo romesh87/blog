@@ -1,3 +1,5 @@
+// eslint-disable-next-line no-use-before-define
+import React from 'react';
 import ReactDOM from 'react-dom';
 
 import styles from './Notification.module.css';
@@ -8,7 +10,7 @@ export interface Props {
   status: 'success' | 'error' | 'pending';
 }
 
-function Notification(props: Props) {
+const Notification: React.FC<Props> = (props) => {
   const { title, message, status } = props;
 
   let statusClasses = '';
@@ -30,6 +32,6 @@ function Notification(props: Props) {
     </div>,
     document.getElementById('notifications'),
   );
-}
+};
 
 export default Notification;
