@@ -1,10 +1,15 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
+// eslint-disable-next-line no-use-before-define
 import React, { useEffect, useState } from 'react';
 
 import Notification from '../UI/Notification/Notification';
 import styles from './ContactForm.module.css';
 
-const sendContactData = async (contactDetails: { email: string, name: string, message: string }): Promise<void> => {
+const sendContactData = async (contactDetails: {
+  email: string,
+  name: string,
+  message: string
+}): Promise<void> => {
   const response = await fetch('/api/contact', {
     method: 'POST',
     headers: {
@@ -20,7 +25,7 @@ const sendContactData = async (contactDetails: { email: string, name: string, me
   }
 };
 
-const ContactForm = () => {
+const ContactForm: React.FC = () => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [message, setMessage] = useState('');

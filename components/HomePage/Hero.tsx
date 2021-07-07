@@ -1,8 +1,11 @@
+// eslint-disable-next-line no-use-before-define
+import React from 'react';
+
 import Image from 'next/image';
 
 import styles from './Hero.module.css';
 
-const Hero = () => (
+const Hero: React.FC = () => (
 
   <section className={styles.hero}>
     <div className={styles.image}>

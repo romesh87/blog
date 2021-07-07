@@ -1,14 +1,18 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+// eslint-disable-next-line no-use-before-define
+import React from 'react';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { IPost } from '../../interfaces';
+
 import styles from './PostItem.module.css';
 
 interface Props {
   post: IPost;
 }
 
-const PostItem = ({ post }: Props) => {
+const PostItem: React.FC<Props> = ({ post }) => {
   const {
     title,
     image,
