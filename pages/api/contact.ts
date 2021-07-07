@@ -19,9 +19,16 @@ const handler: NextApiHandler = async (req, res) => {
     }
 
     // Store in the database
-    const newMessage: { email: string; name: string, message: string, id?: string } = {
+    const newMessage: {
+      email: string;
+      name: string;
+      datetime: Date;
+      message: string;
+      id?: string
+    } = {
       email,
       name,
+      datetime: new Date(),
       message,
     };
 
