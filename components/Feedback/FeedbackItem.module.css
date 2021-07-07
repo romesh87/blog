@@ -1,0 +1,30 @@
+.container {
+  width: 100%;
+  background-color: var(--color-grey-100);
+  border-radius: 6px;
+  padding: 1rem;
+  box-shadow: 0 1px 4px black;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: .5rem;
+  border-bottom: 1px solid black;
+}
+
+.name {
+  font-size: var(--size-5);
+  font-weight: 600;
+}
+
+.datetime {
+  font-size: .9rem;
+  color:  var(--color-grey-600);
+}
+
+.email {
+  color: var(--color-grey-700)
+}
