@@ -31,25 +31,27 @@ const PostItem: React.FC<Props> = ({ post }) => {
   const linkPath = `/posts/${slug}`;
 
   return (
-    <li className={styles.post}>
-      <Link href={linkPath}>
-        <a>
-          <div className={styles.image}>
-            <Image
-              src={imagePath}
-              alt={title}
-              width={300}
-              height={200}
-              layout="responsive"
-            />
-          </div>
-          <div className={styles.content}>
-            <h3>{title}</h3>
-            <time>{formattedDate}</time>
-            <p>{excerpt}</p>
-          </div>
-        </a>
-      </Link>
+    <li>
+      <div className={styles.post}>
+        <Link href={linkPath}>
+          <a>
+            <div className={styles.image}>
+              <Image
+                src={imagePath}
+                alt={title}
+                width={300}
+                height={200}
+                layout="responsive"
+              />
+            </div>
+            <div className={styles.content}>
+              <h3>{title}</h3>
+              <time>{formattedDate}</time>
+              <p>{excerpt}</p>
+            </div>
+          </a>
+        </Link>
+      </div>
     </li>
   );
 };
