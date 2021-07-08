@@ -19,5 +19,10 @@ module.exports = (phase) => {
       mongodb_clustername: 'cluster0',
       mongodb_database: 'blog',
     },
+    eslint: {
+      // Warning: Dangerously allow production builds to successfully complete even if
+      // your project has ESLint errors.
+      ignoreDuringBuilds: true,
+    },
   };
 };
