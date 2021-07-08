@@ -1,9 +1,9 @@
 .container {
   width: 100%;
-  background-color: var(--color-grey-100);
+  background-color: var(--color-grey-50);
   border-radius: 6px;
   padding: 1rem;
-  box-shadow: 0 1px 4px black;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
   margin-bottom: 2rem;
 }
 
@@ -13,7 +13,7 @@
   align-items: center;
   margin-bottom: 1rem;
   padding-bottom: .5rem;
-  border-bottom: 1px solid black;
+  border-bottom: 3px solid var(--color-grey-300);
 }
 
 .name {
@@ -27,5 +27,10 @@
 }
 
 .email {
-  color: var(--color-grey-700)
+  color: var(--color-grey-700);
+}
+
+.body {
+  color: var(--color-grey-800);
+  line-height: 1.4rem;
 }

@@ -47,7 +47,7 @@ const MainNavigation: React.FC = () => {
       {session
         ? (
           <div className={styles.userContainer}>
-            <div>
+            <div className={styles.user}>
               <Image
                 src="/images/site/avatar.png"
                 alt="user avatar"
@@ -55,9 +55,8 @@ const MainNavigation: React.FC = () => {
                 height={40}
                 className={styles.userImage}
               />
-              `
+              <span className={styles.userEmail}>{session.user.email}</span>
             </div>
-            <span className={styles.userName}>{session.user.email}</span>
             <button type="button" className={styles.logout} onClick={logoutClickHandler}>Logout</button>
           </div>
         )
