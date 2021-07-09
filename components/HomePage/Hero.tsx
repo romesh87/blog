@@ -18,8 +18,7 @@ const Hero: React.FC = () => (
     </div>
     <h1>Hi, I'm Roman</h1>
     <p>
-      I blog about web development - especially frontend
-      frameworks like React and Next
+      I blog about web development technologies
     </p>
   </section>
 
