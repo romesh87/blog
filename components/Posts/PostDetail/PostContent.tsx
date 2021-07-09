@@ -6,8 +6,9 @@ import ReactMarkdown from 'react-markdown';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import atomDark from 'react-syntax-highlighter/dist/cjs/styles/prism/atom-dark';
 import js from 'react-syntax-highlighter/dist/cjs/languages/prism/javascript';
+import ts from 'react-syntax-highlighter/dist/cjs/languages/prism/typescript';
 import css from 'react-syntax-highlighter/dist/cjs/languages/prism/css';
-import py from 'react-syntax-highlighter/dist/cjs/languages/prism/python';
+import bash from 'react-syntax-highlighter/dist/cjs/languages/prism/bash';
 
 import PostHeader from './PostHeader';
 
@@ -15,8 +16,9 @@ import styles from './PostContent.module.css';
 import { IPost } from '../../../interfaces';
 
 SyntaxHighlighter.registerLanguage('js', js);
+SyntaxHighlighter.registerLanguage('ts', ts);
 SyntaxHighlighter.registerLanguage('css', css);
-SyntaxHighlighter.registerLanguage('py', py);
+SyntaxHighlighter.registerLanguage('bash', bash);
 
 interface Props {
   post: IPost;
@@ -58,16 +60,20 @@ const PostContent: React.FC<Props> = ({ post }) => {
     },
     code(code) {
       const { className, children } = code;
-      const language = className.split('-')[1]; // className is something like language-js => We need the "js" part here
+      const language = className?.split('-')[1]; // className is something like language-js => We need the "js" part here
 
-      return (
-        <SyntaxHighlighter
-          style={atomDark}
-          language={language}
-        >
-          {children}
-        </SyntaxHighlighter>
-      );
+      if (language) {
+        return (
+          <SyntaxHighlighter
+            style={atomDark}
+            language={language}
+          >
+            {children}
+          </SyntaxHighlighter>
+        );
+      }
+
+      return children;
     },
   };
 

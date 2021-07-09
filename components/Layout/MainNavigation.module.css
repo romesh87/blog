@@ -59,7 +59,7 @@
     font: inherit;
     color: var(--color-grey-50);
     background-color: inherit;
-    border: 3px solid var(--color-grey-50);
+    border: 1px solid var(--color-grey-50);
     border-radius: 8px;
     width: 23%;
     padding: 0.3rem;
