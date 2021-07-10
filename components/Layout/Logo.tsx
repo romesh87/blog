@@ -5,7 +5,7 @@ import styles from './Logo.module.css';
 
 const Logo: React.FC = () => (
   <div className={styles.logo}>
-    Roman's Next Blog
+    My Next Blog
   </div>
 );
 

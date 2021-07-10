@@ -24,11 +24,19 @@
     color: var(--color-grey-50);
     font-size: var(--size-4);
   }
-  
-  .header a:hover,
-  .header a:active,
-  .header a.active {
-    border-bottom: 1px solid var(--color-shadow-of-light-blue);
+
+  .header a:after {
+    display: block;
+    content: '';
+    border-bottom: solid 1px var(--color-grey-50);;  
+    transform: scaleX(0);  
+    transition: transform 150ms ease-in-out;
+  }
+
+  .header a:hover:after,
+  .header a:active:after,
+  .header a.active:after {
+    transform: scaleX(1);
   }
   
   .userContainer {
@@ -59,7 +67,7 @@
     font: inherit;
     color: var(--color-grey-50);
     background-color: inherit;
-    border: 1px solid var(--color-grey-50);
+    border: 2px solid var(--color-grey-50);
     border-radius: 8px;
     width: 23%;
     padding: 0.3rem;
