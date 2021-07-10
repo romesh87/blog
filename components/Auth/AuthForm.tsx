@@ -87,6 +87,11 @@ const AuthForm: React.FC<Props> = (props) => {
         const result = await createUser(enteredEmail, enteredPassword);
         // eslint-disable-next-line no-console
         console.log('User created!', result);
+        await signIn('credentials', {
+          redirect: false,
+          email: enteredEmail,
+          password: enteredPassword,
+        });
         router.replace('/');
       } catch (error) {
         setRequestStatus('error');
